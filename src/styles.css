@@ -1,0 +1,36 @@
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently 
+  supported by Chrome, Edge, Opera and Firefox */
+}
+
+:root {
+  --cell-dimension: 270px;
+}
+
+#ttt-grid-container {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: repeat(3, var(--cell-dimension));
+  grid-template-rows: repeat(3, var(--cell-dimension));
+  gap: 10px;
+}
+
+.grid-cell {
+  background-color: honeydew;
+  font-family: "Permanent Marker", cursive;
+  font-size: 231px;
+  text-align: center;
+  line-height: var(--cell-dimension);
+}
+
+.grid-cell:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
