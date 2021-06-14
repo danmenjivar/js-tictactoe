@@ -7,13 +7,19 @@
     <link rel="stylesheet" href="src/styles.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Bangers&family=Montserrat&family=Source+Sans+Pro&display=swap"
       rel="stylesheet"
     />
-
     <title>Tic tac Toe</title>
   </head>
   <body>
+    <div class="won-overlay">
+      <div class="won-window">
+        <h3>Game Over</h3>
+        <p>Congratulations Player One, you win!</p>
+        <button class="button" id="play-again-btn">PLAY AGAIN</button>
+      </div>
+    </div>
     <div id="ttt-grid-container" class="noselect">
       <div class="grid-cell" data-index="0"></div>
       <div class="grid-cell" data-index="1"></div>
