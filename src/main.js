@@ -38,11 +38,17 @@ const GameBoard = (() => {
     board = new Array(9).fill("");
   };
 
-  const makeMove = (move) => {
-    console.log(`Trying to make move on cell i=${move}`);
+  const makeMove = (move, pOne, pTwo) => {
+    // console.log(`Trying to make move on cell i=${move}`);
     if (board[move] === "") {
-      board[move] = playerOneTurn ? playerOne.marker : playerTwo.marker;
-      _hasWon();
+      board[move] = Game.getPlayerOneTurn()
+        ? pOne.getMarker()
+        : pTwo.getMarker();
+      if (_hasWon()) {
+        let pName = Game.getPlayerOneTurn() ? pOne.getName() : pTwo.getName();
+        console.log(`${pName} has won!`);
+        DisplayController.displayWinner(pName);
+      }
       return true;
     } else {
       return false;
@@ -56,26 +62,35 @@ const GameBoard = (() => {
 const DisplayController = (() => {
   let htmlBoard = document.querySelector("#ttt-grid-container").children;
 
-  const setEventListeners = () => {
+  const setEventListeners = (pOne, pTwo) => {
     // set listeners for the ttt board
     for (let i = 0; i < htmlBoard.length; i++) {
       const cell = htmlBoard[i];
       cell.addEventListener("click", () => {
-        if (GameBoard.makeMove(i)) {
-          if (playerOneTurn) {
-            cell.textContent = playerOne.marker;
-            playerOneTurn = false;
+        if (GameBoard.makeMove(i, pOne, pTwo)) {
+          if (Game.getPlayerOneTurn()) {
+            cell.textContent = pOne.getMarker();
           } else {
-            cell.textContent = playerTwo.marker;
-            playerOneTurn = true;
+            cell.textContent = pTwo.getMarker();
           }
+          Game.togglePlayerOneTurn();
         }
       });
     }
   };
 
+  const _clearView = () => {
+    GameBoard.createBoard();
+    for (let i = 0; i < htmlBoard.length; i++) {
+      const cell = htmlBoard[i];
+      cell.textContent = "";
+    }
+    Game.resetPlayerTurn();
+  };
+
   const displaySetNames = (playerOne, playerTwo) => {
     let namesView = document.querySelector(".names-overlay");
+    _setNamesOnDisplayFields(playerOne, playerTwo);
     namesView.style.display = "block";
 
     // Event handler for switching marks
@@ -101,6 +116,37 @@ const DisplayController = (() => {
 
       namesView.style.display = "none";
     });
+
+    // Add event handler to names settings button
+    document.querySelector("#name-btn").addEventListener("click", () => {
+      // _setNamesOnDisplayFields(playerOne, playerTwo);
+      namesView.style.display = "block";
+    });
+
+    // Event Handler for Reset Button
+    document.querySelector("#reset-btn").addEventListener("click", () => {
+      _clearView();
+    });
+
+    // Play Again
+    document.querySelector("#play-again-btn").addEventListener("click", () => {
+      _clearView();
+      document.querySelector(".won-overlay").style.display = "none";
+    });
+  };
+
+  const _setNamesOnDisplayFields = (playerOne, playerTwo) => {
+    let playerOneName = document.querySelector("#player-one");
+    playerOneName.value = playerOne.getName();
+    let playerTwoName = document.querySelector("#player-two");
+    playerTwoName.value = playerTwo.getName();
+  };
+
+  const displayWinner = (pName) => {
+    let wonWindow = document.querySelector(".won-overlay ");
+    let winMsg = `Congratulations ${pName}, you win!`;
+    wonWindow.querySelector("p").textContent = winMsg;
+    wonWindow.style.display = "block";
   };
 
   function displayBoard(board) {
@@ -114,6 +160,7 @@ const DisplayController = (() => {
   return {
     setEventListeners: setEventListeners,
     displaySetNames: displaySetNames,
+    displayWinner: displayWinner,
   };
 })();
 
@@ -122,22 +169,33 @@ const Game = (() => {
   let playerOne;
   let playerTwo;
 
-  const _playerSelect = () => {};
+  const getPlayerOneTurn = () => {
+    return playerOneTurn;
+  };
+
+  const togglePlayerOneTurn = () => {
+    playerOneTurn = !playerOneTurn;
+  };
 
   const start = () => {
     playerOneTurn = true;
     playerOne = Player("Player One", "X");
     playerTwo = Player("Player Two", "O");
     DisplayController.displaySetNames(playerOne, playerTwo);
+    GameBoard.createBoard();
+    DisplayController.setEventListeners(playerOne, playerTwo);
   };
 
-  const saveSettings = (playerOneSettings, playerTwoSettings) => {
-    console.log("assigning names");
-
-    playerOne.set;
+  const resetPlayerTurn = () => {
+    playerOneTurn = true;
   };
 
-  return { start: start };
+  return {
+    start: start,
+    resetPlayerTurn: resetPlayerTurn,
+    getPlayerOneTurn: getPlayerOneTurn,
+    togglePlayerOneTurn: togglePlayerOneTurn,
+  };
 })();
 
 // Player Object created with factory pattern
@@ -168,7 +226,11 @@ const Player = (name, marker) => {
     marker = newMarker;
   };
 
-  return { name, marker, setName, getName, setMarker };
+  const getMarker = () => {
+    return marker;
+  };
+
+  return { name, marker, setName, getName, setMarker, getMarker };
 };
 
 // // Start a new Game
