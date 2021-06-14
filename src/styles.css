@@ -73,14 +73,73 @@ nav .button:hover {
   opacity: 0.8;
 }
 
-.won-overlay {
-  display: none;
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.5);
+}
+
+.names-overlay {
+  display: none;
+}
+
+.names-overlay .names-window {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25%;
+  width: 600px;
+  height: 400px;
+  background: var(--window-color);
+  text-align: center;
+  border-radius: 3rem;
+  color: white;
+}
+
+.names-overlay .names-window label {
+  font-size: 28px;
+  text-transform: uppercase;
+}
+
+.names-overlay .names-window input {
+  margin-left: 20px;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+
+.names-overlay .names-window h3 {
+  font-size: 35px;
+  font-family: "Bangers", cursive;
+  letter-spacing: 2.3px;
+  text-shadow: 2px 3px #000;
+}
+
+.names-overlay .names-window p {
+  padding: 0px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+}
+
+.names-overlay .names-window .button {
+  align-self: center;
+  background: #73d99f;
+  color: #51548c;
+}
+
+.names-overlay .names-window .button:hover {
+  background-size: 200%;
+  background-position: left;
+  background: #ee74e1;
+  color: #3eecac;
+}
+
+.won-overlay {
+  display: none;
 }
 
 .won-overlay .won-window {

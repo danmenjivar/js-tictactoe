@@ -26,11 +26,32 @@
         <span class="material-icons-outlined"> manage_accounts </span>
       </button>
     </nav>
-    <div class="won-overlay">
+    <div class="won-overlay overlay">
       <div class="won-window">
         <h3>Game Over</h3>
         <p>Congratulations Player One, you win!</p>
-        <button class="button" id="play-again-btn">PLAY AGAIN</button>
+        <button class="button" id="play-again-btn">play again</button>
+      </div>
+    </div>
+    <div class="names-overlay overlay">
+      <div class="names-window">
+        <h3>Options</h3>
+        <div>
+          <div>
+            <label for="player-one">Player 1</label>
+            <input type="text" name="" id="player-one" />
+            <p id="player-one-mark">X</p>
+          </div>
+          <button id="switch-mark" class="button">
+            <span class="material-icons-outlined"> autorenew </span>
+          </button>
+          <div style="margin-bottom: 15px">
+            <p id="player-two-mark">O</p>
+            <label for="player-two">Player 2</label>
+            <input type="text" name="" id="player-two" />
+          </div>
+        </div>
+        <button class="button" id="play-again-btn">Start</button>
       </div>
     </div>
     <div id="ttt-grid-container" class="noselect">
