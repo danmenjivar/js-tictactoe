@@ -15,7 +15,41 @@
   --window-color: #d94848;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* border: 1px solid teal; */
+}
+
+nav h2 {
+  margin: 0px 20px;
+  font-family: "Bangers", cursive;
+  letter-spacing: 2.3px;
+  font-size: 50px;
+  text-shadow: 3px 0.5px rgba(0, 0, 0, 0.5);
+  color: #f25270;
+}
+
+nav .button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #73d99f;
+  text-align: center;
+  color: #51548c;
+}
+
+nav .button:hover {
+  background-size: 200%;
+  background-position: left;
+  background: #ee74e1;
+  color: #3eecac;
+}
+
 #ttt-grid-container {
+  margin-top: 10px;
   display: grid;
   height: 100vh;
   width: 100vw;
@@ -25,7 +59,9 @@
 }
 
 .grid-cell {
-  background-color: honeydew;
+  background-color: #46a68b;
+  color: #f25270;
+  text-shadow: 3px 0.5px rgba(0, 0, 0, 0.5);
   font-family: "Permanent Marker", cursive;
   font-size: 231px;
   text-align: center;
@@ -74,6 +110,7 @@
 }
 
 .won-overlay .won-window .button {
+  margin-top: 50px;
   background: #73d99f;
   color: #51548c;
 }
@@ -97,5 +134,4 @@
   font-weight: 900;
   cursor: pointer;
   transition: 330ms ease-out;
-  margin-top: 50px;
 }
