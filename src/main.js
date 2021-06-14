@@ -4,23 +4,45 @@ let playerOneTurn = true;
 const GameBoard = (() => {
   let board;
 
+  const _hasWon = () => {
+    // win condition: 3 rows, 3 cols, or 2 diagonals
+    let winConditions = [
+      [board[0], board[4], board[8]], // diagonals: [0,4,8] & [2,4,6]
+      [board[2], board[4], board[6]],
+      [board[0], board[3], board[6]], // cols: [0,3,6], [1,4,7], [2,5,8]
+      [board[1], board[4], board[7]],
+      [board[2], board[5], board[8]],
+      [board[0], board[1], board[2]], // rows: [0,1,2], [3,4,5], [6,7,8]
+      [board[3], board[4], board[5]],
+      [board[6], board[7], board[8]],
+    ];
+
+    let won = false;
+    for (let condition of winConditions) {
+      if (
+        condition.every((cell) => cell === "X") ||
+        condition.every((cell) => cell === "O")
+      ) {
+        won = true;
+      }
+    }
+
+    return won;
+  };
+
   const createBoard = () => {
-    board = new Array(9).fill(0);
+    board = new Array(9).fill("");
   };
 
   const makeMove = (move) => {
-    // TODO check if valid, if so make the move and display it
     console.log(`Trying to make move on cell i=${move}`);
-    if (board[move] === 0) {
-      board[move] = 1;
+    if (board[move] === "") {
+      board[move] = playerOneTurn ? playerOne.marker : playerTwo.marker;
+      _hasWon();
       return true;
     } else {
       return false;
     }
-  };
-
-  const hasWon = (player) => {
-    // win condition: 3 rows, 3 cols, or 2 diagonals
   };
 
   return { createBoard, makeMove };
@@ -56,7 +78,6 @@ const DisplayController = (() => {
   }
 
   return {
-    displayBoard: displayBoard,
     setEventListeners: setEventListeners,
   };
 })();
@@ -95,8 +116,6 @@ const Player = (name, marker) => {
 DisplayController.setEventListeners();
 // Start a new Game
 GameBoard.createBoard();
-
-// DisplayController.displayBoard();
 
 let playerOne = Player("Dan", "X");
 let playerTwo = Player("Tom", "O");
