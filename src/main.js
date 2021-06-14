@@ -1,8 +1,12 @@
-let playerOneTurn = true;
+// let playerOneTurn = true;
 
 // GameBoard Module
 const GameBoard = (() => {
   let board;
+
+  const getBoard = () => {
+    return board;
+  };
 
   const _hasWon = () => {
     // win condition: 3 rows, 3 cols, or 2 diagonals
@@ -53,6 +57,7 @@ const DisplayController = (() => {
   let htmlBoard = document.querySelector("#ttt-grid-container").children;
 
   const setEventListeners = () => {
+    // set listeners for the ttt board
     for (let i = 0; i < htmlBoard.length; i++) {
       const cell = htmlBoard[i];
       cell.addEventListener("click", () => {
@@ -69,6 +74,35 @@ const DisplayController = (() => {
     }
   };
 
+  const displaySetNames = (playerOne, playerTwo) => {
+    let namesView = document.querySelector(".names-overlay");
+    namesView.style.display = "block";
+
+    // Event handler for switching marks
+    namesView.querySelector("#switch-mark").addEventListener("click", () => {
+      let playerOneMark = namesView.querySelector("#player-one-mark");
+      let playerTwoMark = namesView.querySelector("#player-two-mark");
+      let temp = playerOneMark.textContent;
+      playerOneMark.textContent = playerTwoMark.textContent;
+      playerTwoMark.textContent = temp;
+    });
+
+    // Event handler for clicking start
+    namesView.querySelector("#start-btn").addEventListener("click", () => {
+      let playerOneName = namesView.querySelector("#player-one");
+      playerOne.setName(playerOneName.value);
+      let playerTwoName = namesView.querySelector("#player-two");
+      playerTwo.setName(playerTwoName.value);
+
+      let playerOneMark = namesView.querySelector("#player-one-mark");
+      playerOne.setMarker(playerOneMark.textContent);
+      let playerTwoMark = namesView.querySelector("#player-two-mark");
+      playerTwo.setMarker(playerTwoMark.textContent);
+
+      namesView.style.display = "none";
+    });
+  };
+
   function displayBoard(board) {
     for (let i = 0; i < htmlBoard.length; i++) {
       const cell = htmlBoard[i];
@@ -79,6 +113,7 @@ const DisplayController = (() => {
 
   return {
     setEventListeners: setEventListeners,
+    displaySetNames: displaySetNames,
   };
 })();
 
@@ -91,6 +126,15 @@ const Game = (() => {
 
   const start = () => {
     playerOneTurn = true;
+    playerOne = Player("Player One", "X");
+    playerTwo = Player("Player Two", "O");
+    DisplayController.displaySetNames(playerOne, playerTwo);
+  };
+
+  const saveSettings = (playerOneSettings, playerTwoSettings) => {
+    console.log("assigning names");
+
+    playerOne.set;
   };
 
   return { start: start };
@@ -110,18 +154,42 @@ const Player = (name, marker) => {
     score = 0;
   };
 
-  return { name, marker, getScore, incrementScore, resetScore };
+  const setName = (newName) => {
+    if (newName !== "") {
+      name = newName;
+    }
+  };
+
+  const getName = () => {
+    return name;
+  };
+
+  const setMarker = (newMarker) => {
+    marker = newMarker;
+  };
+
+  return { name, marker, setName, getName, setMarker };
 };
 
-DisplayController.setEventListeners();
-// Start a new Game
-GameBoard.createBoard();
+// // Start a new Game
+// GameBoard.createBoard();
+// DisplayController.setEventListeners();
 
-let playerOne = Player("Dan", "X");
-let playerTwo = Player("Tom", "O");
+// let playerOne = Player("Dan", "X");
+// let playerTwo = Player("Tom", "O");
 
-console.log(playerOne, playerTwo);
+// console.log(playerOne, playerTwo);
 
-playerOne.incrementScore();
+// playerOne.incrementScore();
 
-console.log(playerOne.getScore(), playerTwo);
+// console.log(playerOne.getScore(), playerTwo);
+
+// document.querySelector("#name-btn");
+
+// // set listeners for reset button
+// document.querySelector("#reset-btn").addEventListener("click", () => {
+//   GameBoard.createBoard();
+//   DisplayController.displayBoard(GameBoard.getBoard());
+// });
+
+Game.start();
