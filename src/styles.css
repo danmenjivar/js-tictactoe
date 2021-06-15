@@ -56,6 +56,11 @@ nav .button:hover {
   gap: 10px;
 }
 
+div#ttt-grid-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .grid-cell {
   background-color: #46a68b;
   color: #f25270;
