@@ -19,8 +19,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  /* border: 1px solid teal; */
+  width: 100vw;
 }
 
 nav h2 {
@@ -50,6 +49,7 @@ nav .button:hover {
 
 #ttt-grid-container {
   margin-top: 10px;
+  width: 830px;
   display: grid;
   grid-template-columns: repeat(3, var(--cell-dimension));
   grid-template-rows: repeat(3, var(--cell-dimension));
@@ -89,9 +89,9 @@ nav .button:hover {
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 25%;
+  margin-top: 10%;
   width: 600px;
-  height: 400px;
+  height: 360px;
   background: var(--window-color);
   text-align: center;
   border-radius: 3rem;
@@ -116,9 +116,10 @@ nav .button:hover {
   text-shadow: 2px 3px #000;
 }
 
-.names-overlay .names-window p {
-  padding: 0px 20px;
-  font-size: 15px;
+.names-overlay .names-window label {
+  text-align: center;
+  line-height: 20px;
+  font-size: 20px;
   font-weight: 600;
   font-family: "Montserrat", sans-serif;
 }
@@ -136,6 +137,18 @@ nav .button:hover {
   color: #3eecac;
 }
 
+button#switch-mark {
+  margin: 20px 0px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+button#start-btn {
+  margin-top: 5px;
+}
+
 .won-overlay {
   display: none;
 }
@@ -143,7 +156,7 @@ nav .button:hover {
 .won-overlay .won-window {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 25%;
+  margin-top: 10%;
   width: 300px;
   height: 300px;
   background: var(--window-color);

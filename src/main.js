@@ -1,5 +1,3 @@
-// let playerOneTurn = true;
-
 // GameBoard Module
 const GameBoard = (() => {
   let board;
@@ -34,6 +32,14 @@ const GameBoard = (() => {
     return won;
   };
 
+  const _hasTied = () => {
+    return !board.includes("");
+  };
+
+  const _isGameOver = () => {
+    return _hasWon() || _hasTied();
+  };
+
   const createBoard = () => {
     board = new Array(9).fill("");
   };
@@ -46,8 +52,9 @@ const GameBoard = (() => {
         : pTwo.getMarker();
       if (_hasWon()) {
         let pName = Game.getPlayerOneTurn() ? pOne.getName() : pTwo.getName();
-        console.log(`${pName} has won!`);
         DisplayController.displayWinner(pName);
+      } else if (_hasTied()) {
+        DisplayController.displayTie();
       }
       return true;
     } else {
@@ -93,13 +100,13 @@ const DisplayController = (() => {
     _setNamesOnDisplayFields(playerOne, playerTwo);
     namesView.style.display = "block";
 
-    // Event handler for switching marks
+    // Event handler for switching player names
     namesView.querySelector("#switch-mark").addEventListener("click", () => {
-      let playerOneMark = namesView.querySelector("#player-one-mark");
-      let playerTwoMark = namesView.querySelector("#player-two-mark");
-      let temp = playerOneMark.textContent;
-      playerOneMark.textContent = playerTwoMark.textContent;
-      playerTwoMark.textContent = temp;
+      let playerOneName = namesView.querySelector("#player-one");
+      let playerTwoName = namesView.querySelector("#player-two");
+      let temp = playerOneName.value;
+      playerOneName.value = playerTwoName.value;
+      playerTwoName.value = temp;
     });
 
     // Event handler for clicking start
@@ -110,11 +117,12 @@ const DisplayController = (() => {
       playerTwo.setName(playerTwoName.value);
 
       let playerOneMark = namesView.querySelector("#player-one-mark");
-      playerOne.setMarker(playerOneMark.textContent);
+      playerOne.setMarker("X");
       let playerTwoMark = namesView.querySelector("#player-two-mark");
-      playerTwo.setMarker(playerTwoMark.textContent);
+      playerTwo.setMarker("O");
 
       namesView.style.display = "none";
+      _clearView();
     });
 
     // Add event handler to names settings button
@@ -149,6 +157,13 @@ const DisplayController = (() => {
     wonWindow.style.display = "block";
   };
 
+  const displayTie = () => {
+    let wonWindow = document.querySelector(".won-overlay ");
+    let winMsg = `It's a tie!`;
+    wonWindow.querySelector("p").textContent = winMsg;
+    wonWindow.style.display = "block";
+  };
+
   function displayBoard(board) {
     for (let i = 0; i < htmlBoard.length; i++) {
       const cell = htmlBoard[i];
@@ -161,6 +176,7 @@ const DisplayController = (() => {
     setEventListeners: setEventListeners,
     displaySetNames: displaySetNames,
     displayWinner: displayWinner,
+    displayTie: displayTie,
   };
 })();
 
@@ -232,26 +248,5 @@ const Player = (name, marker) => {
 
   return { name, marker, setName, getName, setMarker, getMarker };
 };
-
-// // Start a new Game
-// GameBoard.createBoard();
-// DisplayController.setEventListeners();
-
-// let playerOne = Player("Dan", "X");
-// let playerTwo = Player("Tom", "O");
-
-// console.log(playerOne, playerTwo);
-
-// playerOne.incrementScore();
-
-// console.log(playerOne.getScore(), playerTwo);
-
-// document.querySelector("#name-btn");
-
-// // set listeners for reset button
-// document.querySelector("#reset-btn").addEventListener("click", () => {
-//   GameBoard.createBoard();
-//   DisplayController.displayBoard(GameBoard.getBoard());
-// });
 
 Game.start();

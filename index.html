@@ -26,6 +26,17 @@
         <span class="material-icons-outlined"> manage_accounts </span>
       </button>
     </nav>
+    <div id="ttt-grid-container" class="noselect">
+      <div class="grid-cell" data-index="0"></div>
+      <div class="grid-cell" data-index="1"></div>
+      <div class="grid-cell" data-index="2"></div>
+      <div class="grid-cell" data-index="3"></div>
+      <div class="grid-cell" data-index="4"></div>
+      <div class="grid-cell" data-index="5"></div>
+      <div class="grid-cell" data-index="6"></div>
+      <div class="grid-cell" data-index="7"></div>
+      <div class="grid-cell" data-index="8"></div>
+    </div>
     <div class="won-overlay overlay">
       <div class="won-window">
         <h3>Game Over</h3>
@@ -38,32 +49,19 @@
         <h3>Options</h3>
         <div>
           <div>
-            <label for="player-one">Player 1</label>
+            <label for="player-one">X</label>
             <input type="text" name="" id="player-one" />
-            <p id="player-one-mark">X</p>
           </div>
           <button id="switch-mark" class="button">
             <span class="material-icons-outlined"> autorenew </span>
           </button>
           <div style="margin-bottom: 15px">
-            <p id="player-two-mark">O</p>
-            <label for="player-two">Player 2</label>
+            <label for="player-two">O</label>
             <input type="text" name="" id="player-two" />
           </div>
         </div>
         <button class="button" id="start-btn">Start</button>
       </div>
-    </div>
-    <div id="ttt-grid-container" class="noselect">
-      <div class="grid-cell" data-index="0"></div>
-      <div class="grid-cell" data-index="1"></div>
-      <div class="grid-cell" data-index="2"></div>
-      <div class="grid-cell" data-index="3"></div>
-      <div class="grid-cell" data-index="4"></div>
-      <div class="grid-cell" data-index="5"></div>
-      <div class="grid-cell" data-index="6"></div>
-      <div class="grid-cell" data-index="7"></div>
-      <div class="grid-cell" data-index="8"></div>
     </div>
   </body>
   <script src="src/main.js"></script>
