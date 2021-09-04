@@ -1,17 +1,18 @@
-# js-tictactoe
+# JS Tic Tac Toe
 
-A reimplementation of Python tictactoe with GUI
+### [Live Demo](https://danmenjivar.github.io/js-tictactoe/)
 
-## TODO
+![]()
 
-- [x] fix swapping of X and O
-- [x] implement ties
-- [] dumb AI
-- [] minimax unbeatable AI
+#### 📝 Description
+A tic tac toe game. This is part of the Odin Project curriculum. 
 
-- Create a gameboard object (module)
-- Create player object (factory)
-- Object for the flow of the game itself
+### 💡 Features
+* Go 1v1 or
+* play versus the computer
 
-- Module for 1 of something (e.g. gameBoard, displayController)
-- Factories for multiples (e.g. players)
+#### 🛠️ Built with 
+ * HTML
+ * CSS
+ * JavaScript
+ 
