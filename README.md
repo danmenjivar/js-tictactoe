@@ -8,8 +8,7 @@
 A tic tac toe game. This is part of the Odin Project curriculum. 
 
 ### 💡 Features
-* Go 1v1 or
-* play versus the computer
+* Go 1v1 in a game of tic tac toe.
 
 #### 🛠️ Built with 
  * HTML
