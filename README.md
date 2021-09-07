@@ -2,7 +2,7 @@
 
 ### [Live Demo](https://danmenjivar.github.io/js-tictactoe/)
 
-![]()
+![screenshot](js-tictactoe.jpg)
 
 #### 📝 Description
 A tic tac toe game. This is part of the Odin Project curriculum. 
